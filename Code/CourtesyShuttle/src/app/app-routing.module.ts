@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'tab1', loadChildren: './tab1/tab1.module#Tab1PageModule' },
   { path: 'tab2', loadChildren: './tab2/tab2.module#Tab2PageModule' },
   { path: 'book-ride', loadChildren: './book-ride/book-ride.module#BookRidePageModule' },
-  { path: 'ride', loadChildren: './ride/ride.module#RidePageModule' }
+  { path: 'ride', loadChildren: './ride/ride.module#RidePageModule' },
+  { path: 'approve-reject-ride', loadChildren: './approve-reject-ride/approve-reject-ride.module#ApproveRejectRidePageModule' }
 ];
 @NgModule({
   imports: [

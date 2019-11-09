@@ -11,14 +11,19 @@
   <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
     <ion-item>
       <ion-label position="floating">Source</ion-label>
-      <ion-input formControlName="source"></ion-input>
+      <ion-input class="input" #autoCompleteInput formControlName="source"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Destination</ion-label>
-      <ion-input formControlName="destination"></ion-input>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<ion-label position="floating">Destination</ion-label>-->
+      <!--<ion-input class="input" #autoCompleteInput formControlName="destination"></ion-input>-->
+    <!--</ion-item>-->
     <ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Book Ride</ion-button>
-    <ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Schedule for Later</ion-button>
+    <!--<ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Schedule for Later</ion-button>-->
   </form>
   <div #mapElement class="map"></div>
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon">
+    <span id="place-name"  class="title"></span><br>
+    <span id="place-address"></span>
+  </div>
 </ion-content>

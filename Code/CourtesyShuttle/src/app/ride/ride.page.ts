@@ -9,6 +9,7 @@ declare var google;
 })
 export class RidePage implements OnInit, AfterViewInit {
   @ViewChild('mapElement', {static: true}) mapNativeElement: ElementRef;
+  @ViewChild('autoCompleteInput', {static: true}) inputNativeElement: any;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionForm: FormGroup;
@@ -41,15 +42,53 @@ export class RidePage implements OnInit, AfterViewInit {
         center: {lat: -34.397, lng: 150.644},
         zoom: 6
       });
-      const infoWindow = new google.maps.InfoWindow;
-      const pos = {
-        lat: this.latitude,
-        lng: this.longitude
-      };
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      infoWindow.open(map);
-      map.setCenter(pos);
+      const infoWindow = new google.maps.InfoWindow();
+      const infowindowContent = document.getElementById('infowindow-content');
+      infoWindow.setContent(infowindowContent);
+      const marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+      });
+      const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
+      // const pos = {
+      //   lat: this.latitude,
+      //   lng: this.longitude
+      // };
+      autocomplete.addListener('place_changed', () => {
+        infoWindow.close();
+        marker.setVisible(false);
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          window.alert('No details available for input: ' + place.name );
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+        let address = '';
+        if (place.address_components) {
+          address = [
+            (place.address_components[0] && place.address_components[0].short_name || ''),
+            (place.address_components[1] && place.address_components[1].short_name || ''),
+            (place.address_components[2] && place.address_components[2].short_name || '')
+          ].join(' ');
+        }
+        infowindowContent.children['place-icon'].src = place.icon;
+        infowindowContent.children['place-name'].textContent = place.name;
+        infowindowContent.children['place-address'].textContent = address;
+        infoWindow.open(map, marker);
+      });
+      // infoWindow.setPosition(pos);
+      // infoWindow.setContent('Location found.');
+      // infoWindow.open(map);
+      // map.setCenter(pos);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
