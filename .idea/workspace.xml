@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2acfe041-578a-4fd3-aa71-765a0f175cd5" name="Default Changelist" comment="" />
+    <list default="true" id="f3b43e37-dd7a-41b2-aa01-69a1747e6858" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -24,7 +24,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="Code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hack-A-Roo-2019_VipraShuttle-Mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="Code" type="462c0819:PsiDirectoryNode" />
+              <item name="CourtesyShuttle" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
     </panes>
   </component>
@@ -33,7 +54,6 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -47,28 +67,32 @@
       </list>
     </option>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2acfe041-578a-4fd3-aa71-765a0f175cd5" name="Default Changelist" comment="" />
-      <created>1573264631196</created>
+      <changelist id="f3b43e37-dd7a-41b2-aa01-69a1747e6858" name="Default Changelist" comment="" />
+      <created>1573256972731</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1573264631196</updated>
-      <workItem from="1573264633094" duration="1000" />
+      <updated>1573256972731</updated>
+      <workItem from="1573256974017" duration="692000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1000" />
+    <option name="totallyTimeSpent" value="692000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="941" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26041666" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -81,5 +105,8 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
 </project>

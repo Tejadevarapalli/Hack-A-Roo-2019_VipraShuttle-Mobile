@@ -1,0 +1,35 @@
+<!--User Registration-->
+<ion-app>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+          <h4>Sign Up</h4>
+        </div>
+        <div padding>
+          <ion-item>
+            <ion-input type="text" placeholder="First Name" name="fname" [(ngModel)]="fname" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" placeholder="Last Name" name="lname" [(ngModel)]="lname" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" placeholder="UMKC mail ID" name="emailID" [(ngModel)]="emailID" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Confirm Password" name="cpassword" [(ngModel)]="cpassword" required></ion-input>
+          </ion-item>
+        </div>
+        <div padding>
+          <ion-button (click)="addUser()" expand="block">Sign up</ion-button>
+        </div>
+        <div padding>
+          <ion-button  href="/login" expand="block">Sign in</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-app>
