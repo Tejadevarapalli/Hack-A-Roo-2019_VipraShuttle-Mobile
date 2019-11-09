@@ -17,18 +17,19 @@ export class RegistrationPage implements OnInit {
 
   ngOnInit() {
   }
-  // addUser() {
-  //   const userDetails = {} as registration;
-  //   userDetails.emailID = this.emailID;
-  //   userDetails.firstName = this.fname;
-  //   userDetails.lastName = this.lname;
-  //   userDetails.password = this.password;
-  //   userDetails.confirmPassword = this.cpassword;
-  //   this.userService.addUser(userDetails).subscribe(data => {
-  //     localStorage.setItem('authorization', data.toString());
-  //     this.router.navigate(['/login']);
-  //   });
-  // }
+  addUser() {
+    const userDetails = {
+      EmailID : this.emailID,
+      Firstname : this.fname,
+      Lastname : this.lname,
+      Password : this.password,
+      Usertype: 'User'
+    };
+    this.userService.addUser(userDetails).subscribe(data => {
+      localStorage.setItem('authorization', data.toString());
+      this.router.navigate(['/login']);
+    });
+  }
 
   clearValues() {
     this.fname = null;

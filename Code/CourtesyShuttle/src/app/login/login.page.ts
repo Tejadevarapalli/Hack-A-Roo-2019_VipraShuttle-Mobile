@@ -17,27 +17,22 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   login() {
-    const user = {
-      emailID: this.emailID,
-      password: this.password,
-      userType: this.usertype
-    };
 
-    this.loginService.authenticate(user).subscribe( (data) => {
+    const user = {
+      EmailID: this.emailID,
+      Password: this.password,
+      Usertype: this.usertype
+    };
+    console.log(user);
+    this.loginService.authenticate(user).subscribe( data => {
       // @ts-ignore
-      console.log(user);
-      const datadummy = {
-        message: 'success',
-        userType: 'Driver'
-      };
-      if (datadummy.message === 'success') {
+      console.log(data);
+      if (data['message'] === 'success') {
         this.InvalidUser = false;
-        // @ts-ignore
-        console.log(data);
         // @ts-ignore
         localStorage.setItem('userID', data.userID);
         // @ts-ignore
-        if (datadummy.userType === 'Driver') {
+        if (data.userType === 'Driver') {
           this.router.navigate(['./tab1']);
         } else {
           this.router.navigate(['./tab2']);

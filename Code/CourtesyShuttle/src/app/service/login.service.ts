@@ -6,10 +6,11 @@ import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http'
 })
 export class LoginService {
 
-  uri = 'https://smartattend.herokuapp.com/api/login';
+  uri = 'http://localhost:3000/signup/signinDetails';
   constructor( private http: HttpClient) { }
 
   authenticate(user) {
+
     return this.http.post(`${this.uri}`, user);
   }
 }
