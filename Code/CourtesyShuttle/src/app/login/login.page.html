@@ -1,0 +1,39 @@
+<ion-grid class="ion-margin-top">
+  <ion-row justify-content-center>
+    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+      <div text-center class="timesFontStyle">
+
+        <!--<img src="../../assets/images/login2.png" height="50%" width="50%"/>-->
+        <h4>Courtesy Shuttle</h4>
+      </div>
+      <div padding>
+        <ion-item>
+          <ion-label>UserType</ion-label>
+          <ion-select placeholder="Select One" [(ngModel)]= "usertype" required>
+            <ion-select-option value="Driver">Driver</ion-select-option>
+            <ion-select-option value="Patron">Patron</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-input type="text" placeholder="Username" name="email" [(ngModel)]="emailID" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
+        </ion-item>
+      </div>
+      <div padding>
+        <ion-button color="secondary" id="login" (click)="login()" expand="block">Login</ion-button>
+      </div>
+
+      <div padding *ngIf="InvalidUser">
+        <span style="color: red"> *Please check your credentials</span>
+      </div>
+      <!--<div padding>
+        <ion-button class="btn-primary"  href="/registration" expand="block">Sign up</ion-button>
+      </div>-->
+    </ion-col>
+  </ion-row>
+</ion-grid>
