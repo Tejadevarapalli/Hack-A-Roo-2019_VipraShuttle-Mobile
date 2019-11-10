@@ -15,26 +15,19 @@ import { Firebase } from '@ionic-native/firebase/ngx';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
 export class AppComponent {
     rootPage:any = TabsPage;
-  public appPages = [
-      {
-      title: 'Ride',
-      url: '/ride',
-      icon: 'list'
-    },
-      {
-          title: 'Book Ride',
-          url: '/book-ride',
-          icon: 'list'
-      }
-  ];
+    const  Usertype= localStorage.getItem('usertype');
+
+    public appPages = [];
     constructor(platform: Platform, statusBar: StatusBar,
                 splashScreen: SplashScreen, fcm: FcmService,
                 toastCtrl: ToastController,
                 public firebaseNative: Firebase) {
+        console.log("appPages", this.appPages);
+        this.menuMethod();
         platform.ready().then(() => {
-
             statusBar.backgroundColorByHexString('#2693ee');
             statusBar.styleDefault();
             splashScreen.hide();
@@ -58,4 +51,47 @@ export class AppComponent {
         });
     }
 
+    public menuMethod() {
+console.log("Navigation User Type:", this.Usertype );
+        if (this.Usertype === 'Customer') {
+            console.log("I am in Customer condition" );
+            this.appPages = [
+                {
+                    title: 'Profile',
+                    url: '/',
+                    icon: 'contact'
+                },
+                {
+                    title: 'Book Ride',
+                    url: '/book-ride',
+                    icon: 'list'
+                },
+                {
+                    title: 'Logout',
+                    url: '/login',
+                    icon: 'log-out'
+                }
+            ];
+        } else {
+            console.log("I am in Driver condition" );
+            this.appPages = [
+                {
+                    title: 'Profile',
+                    url: '/',
+                    icon: 'contact'
+                },
+                {
+                    title: 'Ride',
+                    url: '/ride',
+                    icon: 'list'
+                },
+                {
+                    title: 'Logout',
+                    url: '/login',
+                    icon: 'log-out'
+                }
+            ];
+        }
+
+    }
 }

@@ -10,7 +10,7 @@ import {Route, Router} from '@angular/router';
 export class LoginPage implements OnInit {
   emailID: String = '';
   password: String = '';
-  usertype:String='';
+  Usertype:String='';
   InvalidUser: Boolean = false;
   user: any;
   constructor(private loginService: LoginService, private router: Router) { }
@@ -33,14 +33,17 @@ export class LoginPage implements OnInit {
     // }
     console.log(this.user);
     this.loginService.authenticate(this.user).subscribe( data => {
-      // @ts-ignore
-      console.log(data);
-      // @ts-ignore
-      if (data.message === 'Success') {
+      var mymessage = 'Success';
+      if (mymessage === 'Success') {
         this.InvalidUser = false;
         // @ts-ignore
+        // localStorage.setItem('userID', data.user.userID);
+
+       localStorage.setItem('usertype',data['Usertype']);
+       var UserType= localStorage.getItem('usertype');
+        console.log('Checking User Type', UserType);
         // @ts-ignore
-        if (data.user[0].Usertype === 'Driver') {
+        if (UserType === 'Driver') {
           this.router.navigate(['/ride']);
           // @ts-ignore
           localStorage.setItem('emailID', data.user[0].EmailID);
@@ -52,7 +55,7 @@ export class LoginPage implements OnInit {
       } else {
         this.InvalidUser = true;
         // @ts-ignore
-        console.log(data.message);
+        console.log("Data.Message",data.message);
       }
     });
   }

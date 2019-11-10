@@ -37,6 +37,7 @@ export class LoginService {
 
   authenticate(user) {
     if (user.Usertype === 'Customer') {
+      console.log("Inside service call", user);
       return this.http.post(`${this.uri}`, user);
     } else {
       return this.http.post(`${this.uriDriver}`, user);
