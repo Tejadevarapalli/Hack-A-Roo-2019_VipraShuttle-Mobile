@@ -152,11 +152,11 @@ export class BookRidePage implements OnInit, AfterViewInit {
       driverEmail: this.allDrivers[shortestDistanceIndex].EmailID
     }
     console.log(bookRide);
-    // this.bookingService.addBooking(bookRide).subscribe(res => {
-    //   console.log(res);
-    // }, err => {
-    //   console.log(err);
-    // });
+    this.bookingService.addBooking(bookRide).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
     const that = this;
     const originDriver = new google.maps.LatLng(this.allDrivers[shortestDistanceIndex].currLat, this.allDrivers[shortestDistanceIndex].currLon)
     this.directionsService.route({
