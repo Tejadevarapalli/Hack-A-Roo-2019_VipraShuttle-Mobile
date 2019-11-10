@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {LoginService} from '../service/login.service';
 declare var google;
 @Component({
   selector: 'app-ride',
@@ -18,14 +19,14 @@ export class RidePage implements OnInit, AfterViewInit {
     lat: 0,
     lng: 0
   };
-
+  updateLocation: any;
   options = {
     enableHighAccuracy: false,
     timeout: 5000,
     maximumAge: 0
   };
 
-  constructor(private fb: FormBuilder, private geolocation: Geolocation) {
+  constructor(private fb: FormBuilder, private geolocation: Geolocation, private loginService: LoginService) {
     this.createDirectionForm();
   }
 
@@ -71,9 +72,19 @@ export class RidePage implements OnInit, AfterViewInit {
     const watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
      console.log(data.coords.latitude, data.coords.longitude);
+     this.updateLocation = {
+       driverEmail: localStorage.getItem('emailID'),
+       currLat: data.coords.latitude,
+       currLon: data.coords.longitude
+     }
+     this.loginService.updateDriversLocation(this.updateLocation).subscribe(res => {
+       console.log(res);
+     }, err => {
+       console.log(err);
+     });
     });
-    this.id = navigator.geolocation.watchPosition(this.success, this.error, this.options);
-    console.log(this.id);
+    // this.id = navigator.geolocation.watchPosition(this.success, this.error, this.options);
+    // console.log(this.id);
   }
 
   success(pos) {

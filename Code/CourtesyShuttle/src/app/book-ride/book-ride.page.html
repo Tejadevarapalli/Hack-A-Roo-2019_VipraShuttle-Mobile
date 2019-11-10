@@ -9,13 +9,25 @@
 <ion-content>
 
   <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+    <!--<ion-item>-->
+      <!--&lt;!&ndash;<ion-label position="floating">Source</ion-label>&ndash;&gt;-->
+      <!--<input type="text" #autoCompleteInput formControlName="source" placeholder="Source" autocomplete="true">-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--&lt;!&ndash;<ion-label position="floating">Destination</ion-label>&ndash;&gt;-->
+      <!--<input type="text" #autoCompleteDestination formControlName="destination" placeholder="Destination" autocomplete="true">-->
+    <!--</ion-item>-->
     <ion-item>
-      <!--<ion-label position="floating">Source</ion-label>-->
-      <input type="text" #autoCompleteInput formControlName="source" autocomplete="true">
-    </ion-item>
+    <ion-select [(ngModel)]="source" formControlName="source" placeholder="Source">
+      <ion-select-option value="5000 Holmes St, Kansas City, MO 64110" selected>5000 Holmes St, Kansas City, MO 64110</ion-select-option>
+      <ion-select-option value="Kansas City, MO 64153">Kansas City, MO 64153</ion-select-option>
+    </ion-select>
+  </ion-item>
     <ion-item>
-      <!--<ion-label position="floating">Destination</ion-label>-->
-      <input type="text" #autoCompleteDestination formControlName="destination" autocomplete="true">
+      <ion-select [(ngModel)]="destination" formControlName="destination"  placeholder="Destination">
+        <ion-select-option value="5000 Holmes St, Kansas City, MO 64110" selected>5000 Holmes St, Kansas City, MO 64110</ion-select-option>
+        <ion-select-option value="Kansas City, MO 64153">Kansas City, MO 64153</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <!--<ion-item>-->

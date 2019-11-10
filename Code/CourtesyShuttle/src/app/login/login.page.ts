@@ -39,12 +39,15 @@ export class LoginPage implements OnInit {
       if (data.message === 'Success') {
         this.InvalidUser = false;
         // @ts-ignore
-        // localStorage.setItem('userID', data.user.userID);
         // @ts-ignore
         if (data.user[0].Usertype === 'Driver') {
           this.router.navigate(['/ride']);
+          // @ts-ignore
+          localStorage.setItem('emailID', data.user[0].driverEmail);
         } else {
           this.router.navigate(['/book-ride']);
+          // @ts-ignore
+          localStorage.setItem('emailID', data.user[0].EmailID);
         }
       } else {
         this.InvalidUser = true;
