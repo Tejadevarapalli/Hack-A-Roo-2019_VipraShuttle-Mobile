@@ -12,6 +12,7 @@ export class RidePage implements OnInit, AfterViewInit {
   @ViewChild('mapElement', {static: false}) mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
+  ETA;
   directionForm: FormGroup;
   map: any;
   id;

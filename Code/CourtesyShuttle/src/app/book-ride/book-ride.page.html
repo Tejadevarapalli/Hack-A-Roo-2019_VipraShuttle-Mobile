@@ -7,8 +7,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div padding *ngIf="ETA != ''">
+    <h3 style="color: black">ETA: {{ETA}}</h3>
+  </div>
 
-  <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+  <form [formGroup]="directionForm" *ngIf="ETA == ''" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
     <!--<ion-item>-->
       <!--&lt;!&ndash;<ion-label position="floating">Source</ion-label>&ndash;&gt;-->
       <!--<input type="text" #autoCompleteInput formControlName="source" placeholder="Source" autocomplete="true">-->
@@ -47,5 +50,4 @@
     <span id="place-name"  class="title"></span><br>
     <span id="place-address"></span>
   </div>
-
 </ion-content>
