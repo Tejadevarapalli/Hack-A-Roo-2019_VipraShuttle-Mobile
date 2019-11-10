@@ -18,19 +18,19 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   login() {
-    if (this.usertype === 'Customer') {
-       this.user = {
-        EmailID: this.emailID,
-        Password: this.password,
-         Usertype: this.usertype
-      };
-    } else {
-      this.user = {
-        driverEmail: this.emailID,
-        driverPassword: this.password,
-        Usertype: this.usertype
-      };
-    }
+    // if (this.usertype === 'Customer') {
+     this.user = {
+      EmailID: this.emailID,
+      Password: this.password,
+       Usertype: this.usertype
+    };
+    // } else {
+    //   this.user = {
+    //     driverEmail: this.emailID,
+    //     driverPassword: this.password,
+    //     Usertype: this.usertype
+    //   };
+    // }
     console.log(this.user);
     this.loginService.authenticate(this.user).subscribe( data => {
       // @ts-ignore
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
         if (data.user[0].Usertype === 'Driver') {
           this.router.navigate(['/ride']);
           // @ts-ignore
-          localStorage.setItem('emailID', data.user[0].driverEmail);
+          localStorage.setItem('emailID', data.user[0].EmailID);
         } else {
           this.router.navigate(['/book-ride']);
           // @ts-ignore

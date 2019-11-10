@@ -30,24 +30,24 @@ export class RegistrationPage implements OnInit {
     });
   }
   addUser() {
-    if (this.userType === 'Driver') {
-      this.userDetails = {
-        driverName : this.fname + ' ' + this.lname,
-        driverEmail: this.emailID,
-        driverPassword : this.password,
-        Usertype : this.userType,
-        currLat: this.currentLocation.lat,
-        currLon: this.currentLocation.lng
-      };
-    } else {
-      this.userDetails = {
-        EmailID : this.emailID,
-        Firstname : this.fname,
-        Lastname : this.lname,
-        Password : this.password,
-        Usertype: this.userType,
-      };
-    }
+    // if (this.userType === 'Driver') {
+    //   this.userDetails = {
+    //     driverName : this.fname + ' ' + this.lname,
+    //     driverEmail: this.emailID,
+    //     driverPassword : this.password,
+    //     Usertype : this.userType,
+    //     currLat: this.currentLocation.lat,
+    //     currLon: this.currentLocation.lng
+    //   };
+    // } else {
+    this.userDetails = {
+      EmailID : this.emailID,
+      Firstname : this.fname,
+      Lastname : this.lname,
+      Password : this.password,
+      Usertype: this.userType,
+    };
+    // }
 
     console.log(this.userDetails);
     this.userService.addUser(this.userDetails).subscribe(data => {

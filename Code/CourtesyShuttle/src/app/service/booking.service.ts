@@ -13,6 +13,7 @@ const httpOptions = {
 export class BookingService {
 
   uriBooking = 'http://localhost:3000/booking/createBooking';
+  uriPickup = 'http://localhost:3000/booking/getMyPickUps';
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +36,9 @@ export class BookingService {
 
   addBooking(bookingDetails) {
       return this.http.post(`${this.uriBooking}`, bookingDetails);
+  }
+  getMyPickups(driverEmail) {
+    return this.http.post(`${this.uriPickup}`, driverEmail);
   }
 
 }
