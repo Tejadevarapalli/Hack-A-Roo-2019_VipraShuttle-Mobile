@@ -15,7 +15,12 @@ export class AppComponent {
       title: 'Ride',
       url: '/ride',
       icon: 'list'
-    }
+    },
+      {
+          title: 'Book Ride',
+          url: '/book-ride',
+          icon: 'list'
+      }
   ];
   constructor(
     private platform: Platform,

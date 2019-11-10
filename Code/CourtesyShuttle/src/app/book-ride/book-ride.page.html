@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>bookRide</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Book-Ride</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+
+  <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+    <ion-item>
+      <!--<ion-label position="floating">Source</ion-label>-->
+      <input type="text" #autoCompleteInput formControlName="source" autocomplete="true">
+    </ion-item>
+    <ion-item>
+      <!--<ion-label position="floating">Destination</ion-label>-->
+      <input type="text" #autoCompleteDestination formControlName="destination" autocomplete="true">
+    </ion-item>
+
+    <!--<ion-item>-->
+      <!--<ion-label>Destination Location</ion-label>-->
+      <!--<ion-select formControlName="destinationPlace" placeholder="Select One">-->
+        <!--<ion-select-option value="umkc">University of Missouri-Kansas City: Volker Campus, Holmes Street, Kansas City, MO, USA</ion-select-option>-->
+        <!--<ion-select-option value="airport">Airport, Kansas City, MO, USA</ion-select-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
+
+    <ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Book Ride</ion-button>
+  </form>
+
+  <div #mapElement class="map" id="map"></div>
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon">
+    <span id="place-name"  class="title"></span><br>
+    <span id="place-address"></span>
+  </div>
 
 </ion-content>

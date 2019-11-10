@@ -12,30 +12,39 @@ export class LoginPage implements OnInit {
   password: String = '';
   usertype:String='';
   InvalidUser: Boolean = false;
+  user: any;
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
   login() {
-
-    const user = {
-      EmailID: this.emailID,
-      Password: this.password,
-      Usertype: this.usertype
-    };
-    console.log(user);
-    this.loginService.authenticate(user).subscribe( data => {
+    if (this.usertype === 'Customer') {
+       this.user = {
+        EmailID: this.emailID,
+        Password: this.password,
+         Usertype: this.usertype
+      };
+    } else {
+      this.user = {
+        driverEmail: this.emailID,
+        driverPassword: this.password,
+        Usertype: this.usertype
+      };
+    }
+    console.log(this.user);
+    this.loginService.authenticate(this.user).subscribe( data => {
       // @ts-ignore
       console.log(data);
-      if (data['message'] === 'success') {
+      // @ts-ignore
+      if (data.message === 'Success') {
         this.InvalidUser = false;
         // @ts-ignore
-        localStorage.setItem('userID', data.userID);
+        // localStorage.setItem('userID', data.user.userID);
         // @ts-ignore
-        if (data.userType === 'Driver') {
-          this.router.navigate(['./tab1']);
+        if (data.user[0].Usertype === 'Driver') {
+          this.router.navigate(['/ride']);
         } else {
-          this.router.navigate(['./tab2']);
+          this.router.navigate(['/book-ride']);
         }
       } else {
         this.InvalidUser = true;

@@ -14,7 +14,13 @@
             <ion-input type="text" placeholder="Last Name" name="lname" [(ngModel)]="lname" required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input type="text" placeholder="UMKC mail ID" name="emailID" [(ngModel)]="emailID" required></ion-input>
+          <ion-input type="text" placeholder="Email ID" name="emailID" [(ngModel)]="emailID" required></ion-input>
+        </ion-item>
+          <ion-item>
+            <ion-select [(ngModel)]="userType"  placeholder="User Type">
+              <ion-select-option value="Customer" selected>Customer</ion-select-option>
+              <ion-select-option value="Driver">Driver</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item>
             <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
