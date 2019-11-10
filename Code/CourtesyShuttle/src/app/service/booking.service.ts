@@ -10,13 +10,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class BookingService {
 
-  uri = 'http://localhost:3000/signup/signinDetails';
-  uriDriver = 'http://localhost:3000/driver/signinDetails';
-  uriGetDriver = 'http://localhost:3000/driver/getAll';
-  uriUpdateLocation = 'http://localhost:3000/driver/updateLocation';
-  constructor( private http: HttpClient) { }
+  uriBooking = 'http://localhost:3000/booking/createBooking';
+  uriPickup = 'http://localhost:3000/booking/getMyPickUps';
+
+  constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -35,23 +34,11 @@ export class LoginService {
     return body || {};
   }
 
-  authenticate(user) {
-    if (user.Usertype === 'Customer') {
-      console.log("Inside service call", user);
-      return this.http.post(`${this.uri}`, user);
-    } else {
-      return this.http.post(`${this.uriDriver}`, user);
-    }
+  addBooking(bookingDetails) {
+      return this.http.post(`${this.uriBooking}`, bookingDetails);
+  }
+  getMyPickups(driverEmail) {
+    return this.http.post(`${this.uriPickup}`, driverEmail);
   }
 
-  getAllDrivers() {
-    return this.http.get(`${this.uriGetDriver}`, httpOptions).pipe(
-        map(this.extractData),
-        catchError(this.handleError));
-  }
-
-  updateDriversLocation(driverDetails) {
-    console.log(driverDetails);
-    return this.http.put(`${this.uriUpdateLocation}`, driverDetails);
-  }
 }

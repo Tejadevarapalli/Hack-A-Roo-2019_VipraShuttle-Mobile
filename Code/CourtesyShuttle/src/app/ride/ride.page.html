@@ -9,10 +9,15 @@
 <ion-content>
 
   <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
-    <ion-item>
-      <ion-label position="floating">Destination</ion-label>
-      <ion-input formControlName="destination"></ion-input>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<ion-label position="floating">Destination</ion-label>-->
+      <!--<ion-input formControlName="destination"></ion-input>-->
+    <!--</ion-item>-->
+    <ion-select [(ngModel)]="destination" formControlName="destination"  placeholder="Destination">
+      <ion-select-option value="Kansas City International Airport" selected>Kansas City International Airport</ion-select-option>
+      <ion-select-option value="The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116">The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116</ion-select-option>
+      <ion-select-option value="University of Missouri-Kansas City: Volker Campus">University of Missouri-Kansas City: Volker Campus</ion-select-option>
+    </ion-select>
     <ion-button expand="full" type="submit" [disabled]="!directionForm.valid">Start Ride</ion-button>
   </form>
 

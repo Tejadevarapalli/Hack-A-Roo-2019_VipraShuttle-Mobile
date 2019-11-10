@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {LoginService} from '../service/login.service';
+import {BookingService} from '../service/booking.service';
+
 declare var google;
 @Component({
   selector: 'app-ride',
@@ -11,6 +14,7 @@ export class RidePage implements OnInit, AfterViewInit {
   @ViewChild('mapElement', {static: false}) mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
+  destination;
   directionForm: FormGroup;
   map: any;
   id;
@@ -18,14 +22,14 @@ export class RidePage implements OnInit, AfterViewInit {
     lat: 0,
     lng: 0
   };
-
+  updateLocation: any;
   options = {
     enableHighAccuracy: false,
     timeout: 5000,
     maximumAge: 0
   };
-
-  constructor(private fb: FormBuilder, private geolocation: Geolocation) {
+  myPickUps: any;
+  constructor(private fb: FormBuilder, private geolocation: Geolocation, private loginService: LoginService, private bookingService: BookingService) {
     this.createDirectionForm();
   }
 
@@ -46,22 +50,23 @@ export class RidePage implements OnInit, AfterViewInit {
         center: {lat: this.currentLocation.lat, lng: this.currentLocation.lon },
         zoom: 18
       });
-      const infoWindow = new google.maps.InfoWindow();
+      // const infoWindow = new google.maps.InfoWindow();
       const pos = {
         lat: this.currentLocation.lat,
         lng: this.currentLocation.lon
       };
+      this.directionsDisplay.setMap(this.map);
       this.map.setCenter(pos);
-      const icon = {
-        url: 'assets/icon/icons8-car-50.png', // image url
-        scaledSize: new google.maps.Size(20, 20), // scaled size
-      };
-      const marker = new google.maps.Marker({
-        position: pos,
-        map: this.map,
-        title: 'Hello World!',
-        icon: icon
-      });
+      // const icon1 = {
+      //   url: 'assets/icon/icons8-car-50.png', // image url
+      //   scaledSize: new google.maps.Size(20, 20), // scaled size
+      // };
+      // const marker = new google.maps.Marker({
+      //   position: pos,
+      //   map: this.map,
+      //   title: 'Hello World!',
+      //   icon: icon1
+      // });
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -71,9 +76,38 @@ export class RidePage implements OnInit, AfterViewInit {
     const watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
      console.log(data.coords.latitude, data.coords.longitude);
+     this.updateLocation = {
+       EmailID: localStorage.getItem('emailID'),
+       currLat: data.coords.latitude,
+       currLon: data.coords.longitude
+     }
+     this.loginService.updateDriversLocation(this.updateLocation).subscribe(res => {
+       console.log(res);
+     }, err => {
+       console.log(err);
+     });
     });
-    this.id = navigator.geolocation.watchPosition(this.success, this.error, this.options);
-    console.log(this.id);
+    // this.id = navigator.geolocation.watchPosition(this.success, this.error, this.options);
+    // console.log(this.id);
+    const driverDetails = {
+      userid: localStorage.getItem('emailID')
+    }
+    this.bookingService.getMyPickups(driverDetails).subscribe(res => {
+      console.log(res);
+      // @ts-ignore
+      if (res.length > 0) {
+        // @ts-ignore
+       for (let i = 0; i < res.length ; i++) {
+         this.myPickUps = {
+           location: res[i].fromlocation,
+           stopover: true
+         };
+       }
+       console.log(this.myPickUps);
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
   success(pos) {
@@ -84,14 +118,14 @@ export class RidePage implements OnInit, AfterViewInit {
     console.warn('ERROR(' + err.code + '): ' + err.message);
   }
 
-
-
   calculateAndDisplayRoute(formValues) {
     const that = this;
+    const source = new google.maps.LatLng(39.0333147, -94.5797358);
     this.directionsService.route({
-      origin: this.currentLocation,
+      origin: source,
       destination: formValues.destination,
-      travelMode: 'DRIVING'
+      waypoints: [this.myPickUps],
+      travelMode: 'DRIVING',
     }, (response, status) => {
       if (status === 'OK') {
         that.directionsDisplay.setDirections(response);

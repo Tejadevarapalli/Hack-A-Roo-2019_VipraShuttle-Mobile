@@ -7,15 +7,32 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div padding *ngIf="ETA != ''">
+    <h3 style="color: black">ETA: {{ETA}}</h3>
+  </div>
 
-  <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+  <form [formGroup]="directionForm" *ngIf="ETA == ''" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+    <!--<ion-item>-->
+      <!--&lt;!&ndash;<ion-label position="floating">Source</ion-label>&ndash;&gt;-->
+      <!--<input type="text" #autoCompleteInput formControlName="source" placeholder="Source" autocomplete="true">-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--&lt;!&ndash;<ion-label position="floating">Destination</ion-label>&ndash;&gt;-->
+      <!--<input type="text" #autoCompleteDestination formControlName="destination" placeholder="Destination" autocomplete="true">-->
+    <!--</ion-item>-->
     <ion-item>
-      <!--<ion-label position="floating">Source</ion-label>-->
-      <input type="text" #autoCompleteInput formControlName="source" autocomplete="true">
-    </ion-item>
+    <ion-select [(ngModel)]="source" formControlName="source" placeholder="Source">
+      <ion-select-option value="Kansas City International Airport" selected>Kansas City International Airport</ion-select-option>
+      <ion-select-option value="The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116">The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116</ion-select-option>
+      <ion-select-option value="University of Missouri-Kansas City: Volker Campus">University of Missouri-Kansas City: Volker Campus</ion-select-option>
+    </ion-select>
+  </ion-item>
     <ion-item>
-      <!--<ion-label position="floating">Destination</ion-label>-->
-      <input type="text" #autoCompleteDestination formControlName="destination" autocomplete="true">
+      <ion-select [(ngModel)]="destination" formControlName="destination"  placeholder="Destination">
+        <ion-select-option value="Kansas City International Airport" selected>Kansas City International Airport</ion-select-option>
+        <ion-select-option value="The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116">The Retreat at Walnut Creek, 1300 NE Parvin Rd, Kansas City, MO 64116</ion-select-option>
+        <ion-select-option value="University of Missouri-Kansas City: Volker Campus">University of Missouri-Kansas City: Volker Campus</ion-select-option>
+    </ion-select>
     </ion-item>
 
     <!--<ion-item>-->
@@ -35,5 +52,4 @@
     <span id="place-name"  class="title"></span><br>
     <span id="place-address"></span>
   </div>
-
 </ion-content>
