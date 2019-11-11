@@ -38,23 +38,25 @@ export class LoginPage implements OnInit {
         this.InvalidUser = false;
         // @ts-ignore
         // localStorage.setItem('userID', data.user.userID);
-       localStorage.setItem('usertype',  data.user[0].Usertype);
-       let UserType= localStorage.getItem('usertype');
+
+        // @ts-ignore
+       localStorage.setItem('usertype', data['Usertype']);
+       var UserType= localStorage.getItem('usertype');
         console.log('Checking User Type', UserType);
         // @ts-ignore
         if (UserType === 'Driver') {
           this.router.navigate(['/ride']);
           // @ts-ignore
-          localStorage.setItem('emailID', data.user[0].EmailID);
+          localStorage.setItem('emailID', data['EmailID']);
         } else {
           this.router.navigate(['/book-ride']);
           // @ts-ignore
-          localStorage.setItem('emailID', data.user[0].EmailID);
+          localStorage.setItem('emailID', data['EmailID']);
         }
       } else {
         this.InvalidUser = true;
         // @ts-ignore
-        console.log('Data.Message', data.message);
+        console.log("Data.Message",data.message);
       }
     });
   }

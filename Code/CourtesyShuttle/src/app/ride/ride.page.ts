@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {LoginService} from '../service/login.service';
 import {BookingService} from '../service/booking.service';
+import {AlertController} from '@ionic/angular';
 
 declare var google;
 @Component({
@@ -29,11 +30,22 @@ export class RidePage implements OnInit, AfterViewInit {
     maximumAge: 0
   };
   myPickUps: any;
-  constructor(private fb: FormBuilder, private geolocation: Geolocation, private loginService: LoginService, private bookingService: BookingService) {
+  constructor(private fb: FormBuilder, private geolocation: Geolocation, private loginService: LoginService, private bookingService: BookingService, private alertController: AlertController) {
     this.createDirectionForm();
   }
 
   ngOnInit() {
+    this.presentAlertMultipleButtons();
+  }
+
+  async presentAlertMultipleButtons() {
+    const alert = await this.alertController.create({
+      header: 'Booking Alert',
+      message: 'You have a new request.',
+      buttons: ['Accept', 'Reject']
+    });
+
+    await alert.present();
   }
 
   createDirectionForm() {
@@ -90,7 +102,7 @@ export class RidePage implements OnInit, AfterViewInit {
     // this.id = navigator.geolocation.watchPosition(this.success, this.error, this.options);
     // console.log(this.id);
     const driverDetails = {
-      userid: localStorage.getItem('emailID')
+      userid: 'driver@gmail.com'
     }
     this.bookingService.getMyPickups(driverDetails).subscribe(res => {
       console.log(res);
