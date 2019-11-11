@@ -31,6 +31,9 @@ export class BookRidePage implements OnInit, AfterViewInit {
   driverCount;
   marker: any;
   markerArray = [];
+  shortestDistanceIndex = 0;
+  distance = 0;
+  shortestDistance = 5000;
 
   constructor(private fb: FormBuilder, private geolocation: Geolocation, private loginService: LoginService, private bookingService: BookingService) {
     this.createDirectionForm();
@@ -81,7 +84,7 @@ export class BookRidePage implements OnInit, AfterViewInit {
           this.marker = new google.maps.Marker({
             position: new google.maps.LatLng(this.allDrivers[this.driverCount].currLat, this.allDrivers[this.driverCount].currLon),
             map: this.map,
-            title: 'Hello World!',
+            title: this.allDrivers[this.driverCount].Firstname,
             icon: icon1
           });
           this.markerArray.push(this.marker);
@@ -94,36 +97,9 @@ export class BookRidePage implements OnInit, AfterViewInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    // this.addMarker(this.map);
-      // const infowindow = new google.maps.InfoWindow();
-      // const infowindowContent = document.getElementById('infowindow-content');
-      // infowindow.setContent(infowindowContent);
-    //   const marker = new google.maps.Marker({
-    //   map: this.map,
-    //   anchorPoint: new google.maps.Point(0, -29)
-    // });
-
-      // const infoWindow = new google.maps.InfoWindow();
-
-      // const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
-    // autocomplete.addListener('place_changed', () => {
-    //   infowindow.close();
-    //   marker.setVisible(false);
-    //   const place = autocomplete.getPlace();
-    // });
-    //
-    // const autocompleteDestination = new google.maps.places.Autocomplete(this.inputDestinationElement.nativeElement as HTMLInputElement);
-    // autocompleteDestination.addListener('place_changed', () => {
-    //   infowindow.close();
-    //   marker.setVisible(false);
-    //   const place = autocompleteDestination.getPlace();
-    // });
   }
 
-  calculateAndDisplayRoute(formValues) {
-    let shortestDistanceIndex = 0;
-    let distance = 0;
-    let shortestDistance = 5000;
+  getNearestShuttle(formValues) {
     for (this.driverCount = 0 ; this.driverCount < this.allDrivers.length; this.driverCount++) {
       this.distanceMatrix.getDistanceMatrix({
         origins: [new google.maps.LatLng(this.allDrivers[this.driverCount].currLat, this.allDrivers[this.driverCount].currLon)],
@@ -133,23 +109,25 @@ export class BookRidePage implements OnInit, AfterViewInit {
         avoidHighways: false,
         avoidTolls: false
       }, (response, status) => {
-        distance = response.rows[0].elements[0].duration.value;
+        this.distance = response.rows[0].elements[0].duration.value;
         this.ETA = response.rows[0].elements[0].duration.text;
-        if (distance < shortestDistance) {
-          shortestDistance = distance;
-          shortestDistanceIndex = this.driverCount;
+        if (this.distance < this.shortestDistance) {
+          this.shortestDistance = this.distance;
+          this.shortestDistanceIndex = this.driverCount;
         }
         console.log(response.rows[0].elements[0].duration);
         console.log(status);
       });
     }
-
+  }
+  calculateAndDisplayRoute(formValues) {
+    this.getNearestShuttle(formValues);
     const bookRide = {
       userid: localStorage.getItem('emailID'),
       requesttime: new Date(),
       fromlocation: formValues.source,
       tolocation: formValues.destination,
-      driverEmail: this.allDrivers[shortestDistanceIndex].EmailID
+      driverEmail: this.allDrivers[this.shortestDistanceIndex].EmailID
     }
     console.log(bookRide);
     this.bookingService.addBooking(bookRide).subscribe(res => {
@@ -158,7 +136,7 @@ export class BookRidePage implements OnInit, AfterViewInit {
       console.log(err);
     });
     const that = this;
-    const originDriver = new google.maps.LatLng(this.allDrivers[shortestDistanceIndex].currLat, this.allDrivers[shortestDistanceIndex].currLon)
+    const originDriver = new google.maps.LatLng(this.allDrivers[this.shortestDistanceIndex].currLat, this.allDrivers[this.shortestDistanceIndex].currLon)
     this.directionsService.route({
       origin: originDriver,
       destination: formValues.source,
@@ -175,12 +153,12 @@ export class BookRidePage implements OnInit, AfterViewInit {
       this.markerArray[i].setMap(null);
     }
 
-       const icon1 = {
+    const icon1 = {
       url: 'assets/icon/icons8-car-50.png', // image url
       scaledSize: new google.maps.Size(20, 20), // scaled size
     };
     this.marker = new google.maps.Marker({
-      position: new google.maps.LatLng(this.allDrivers[shortestDistanceIndex].currLat, this.allDrivers[shortestDistanceIndex].currLon),
+      position: new google.maps.LatLng(this.allDrivers[this.shortestDistanceIndex].currLat, this.allDrivers[this.shortestDistanceIndex].currLon),
       map: this.map,
       title: 'Hello World!',
       icon: icon1

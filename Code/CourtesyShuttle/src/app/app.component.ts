@@ -17,15 +17,15 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 })
 
 export class AppComponent {
-    rootPage:any = TabsPage;
-    const  Usertype= localStorage.getItem('usertype');
+    rootPage: any = TabsPage;
+    Usertype = localStorage.getItem('usertype');
 
     public appPages = [];
     constructor(platform: Platform, statusBar: StatusBar,
                 splashScreen: SplashScreen, fcm: FcmService,
                 toastCtrl: ToastController,
                 public firebaseNative: Firebase) {
-        console.log("appPages", this.appPages);
+        console.log('appPages', this.appPages);
         this.menuMethod();
         platform.ready().then(() => {
             statusBar.backgroundColorByHexString('#2693ee');
@@ -52,7 +52,7 @@ export class AppComponent {
     }
 
     public menuMethod() {
-console.log("Navigation User Type:", this.Usertype );
+console.log('Navigation User Type:', this.Usertype );
         if (this.Usertype === 'Customer') {
             console.log("I am in Customer condition" );
             this.appPages = [
