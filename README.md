@@ -6,6 +6,6 @@ This is the mobile component for Courtesy shuttle applications. This mobile app 
 
 Part 1(Web Application):https://www.youtube.com/watch?v=N2GGm5MdVwY&feature=youtu.be
 
-Part 2:
+Part 2(Cross Platform Mobila Application):
 
 
