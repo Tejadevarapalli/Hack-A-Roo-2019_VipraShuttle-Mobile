@@ -19,8 +19,9 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 export class AppComponent {
     rootPage: any = TabsPage;
     Usertype = localStorage.getItem('usertype');
-
     public appPages = [];
+    String // @ts-ignore
+    Usertype = localStorage.getItem('usertype');
     constructor(platform: Platform, statusBar: StatusBar,
                 splashScreen: SplashScreen, fcm: FcmService,
                 toastCtrl: ToastController,

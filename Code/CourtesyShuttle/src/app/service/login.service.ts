@@ -13,7 +13,7 @@ const httpOptions = {
 export class LoginService {
 
   uri = 'http://localhost:3000/signup/signinDetails';
-  uriDriver = 'http://localhost:3000/driver/signinDetails';
+  uriDriver = 'http://localhost:3000/driver/signupDetails';
   uriGetDriver = 'http://localhost:3000/driver/getAll';
   uriUpdateLocation = 'http://localhost:3000/driver/updateLocation';
   constructor( private http: HttpClient) { }
@@ -40,6 +40,7 @@ export class LoginService {
       console.log("Inside service call", user);
       return this.http.post(`${this.uri}`, user);
     } else {
+      console.log("I am here at the login service driver page")
       return this.http.post(`${this.uriDriver}`, user);
     }
   }

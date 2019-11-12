@@ -10,7 +10,7 @@ import {Route, Router} from '@angular/router';
 export class LoginPage implements OnInit {
   emailID: String = '';
   password: String = '';
-  Usertype: String='';
+  Usertype:String='';
   InvalidUser: Boolean = false;
   user: any;
   constructor(private loginService: LoginService, private router: Router) { }
@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
      this.user = {
       EmailID: this.emailID,
       Password: this.password,
-         Usertype: this.Usertype
+       Usertype: this.Usertype
     };
     // } else {
     //   this.user = {
@@ -33,13 +33,14 @@ export class LoginPage implements OnInit {
     // }
     console.log(this.user);
     this.loginService.authenticate(this.user).subscribe( data => {
-      let mymessage = 'Success';
+      var mymessage = 'Success';
       if (mymessage === 'Success') {
         this.InvalidUser = false;
         // @ts-ignore
         // localStorage.setItem('userID', data.user.userID);
-       localStorage.setItem('usertype',  data.user[0].Usertype);
-       let UserType= localStorage.getItem('usertype');
+        console.log("Backed Return Data",data);
+       localStorage.setItem('usertype', this.user.Usertype);
+       var UserType= localStorage.getItem('usertype');
         console.log('Checking User Type', UserType);
         // @ts-ignore
         if (UserType === 'Driver') {
@@ -54,7 +55,7 @@ export class LoginPage implements OnInit {
       } else {
         this.InvalidUser = true;
         // @ts-ignore
-        console.log('Data.Message', data.message);
+        console.log("Data.Message",data.message);
       }
     });
   }
