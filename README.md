@@ -1,6 +1,6 @@
 # Hack-A-Roo-2019_Vipra:
 
-This is the mobile component for Courtesy shuttle applications. This mobile app will be used as a shuttle service for different organization. Users of the organization can book shuttle which will pick up and drop at different places.
+We have built an uber style hailing app for the specific organization to provide convenient transportation for their customers. App should allow patrons to request a pickup. As soon as a request is sent with the location, the driver of the nearest shuttle will be notified of the pickup location. Once the driver accepts the pickup, it will automatically route the driver to the patron’s location with the least distance and time option.
 
 # Please find the Video links of our application here
 
