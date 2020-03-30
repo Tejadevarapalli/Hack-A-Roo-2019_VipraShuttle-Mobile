@@ -10,8 +10,7 @@ Part 2(Cross Platform Mobila Application):https://www.youtube.com/watch?v=pstdoG
 
 PPT: https://github.com/DharaniMuli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/master/Requirements/Vipra_Courtesy_Shuttle_PPT.pptx
 
-Wiki:   https://github.com/DharaniMuli/Hack-A-Roo-2019_VipraShuttle-Mobile/wiki/%23-Hackathon2019-:-Vipra-Courtesy-Shuttle-App
+Wiki:   https://github.com/Tejadevarapalli/Hack_A_Roo_2019_VipraShuttle-Web/wiki/Shuttle-App
 
 Won third Prize(certificates):
-1. Dharani Certificate:
-https://github.com/DharaniMuli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/master/Requirements/Muli%2C%20Dharani_Certificate.pdf
+1. Teja Certificate:
