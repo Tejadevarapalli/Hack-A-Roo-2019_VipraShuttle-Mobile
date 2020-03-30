@@ -8,7 +8,7 @@ Part 1(Web Application):https://www.youtube.com/watch?v=N2GGm5MdVwY&feature=yout
 
 Part 2(Cross Platform Mobila Application):https://www.youtube.com/watch?v=pstdoGueMw0&feature=youtu.be
 
-PPT: https://github.com/DharaniMuli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/master/Requirements/Vipra_Courtesy_Shuttle_PPT.pptx
+PPT:https://github.com/Tejadevarapalli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/master/Requirements/Vipra_Courtesy_Shuttle_PPT.pptx
 
 Wiki:   https://github.com/Tejadevarapalli/Hack_A_Roo_2019_VipraShuttle-Web/wiki/Shuttle-App
 
