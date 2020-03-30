@@ -13,4 +13,4 @@ PPT: https://github.com/DharaniMuli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/mas
 Wiki:   https://github.com/Tejadevarapalli/Hack_A_Roo_2019_VipraShuttle-Web/wiki/Shuttle-App
 
 Won third Prize(certificates):
-1. Teja Certificate:
+1. Teja Certificate: https://github.com/Tejadevarapalli/Hack-A-Roo-2019_VipraShuttle-Mobile/blob/master/Devarapalli%2CTeja_certificate.pdf
